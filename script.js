@@ -8,6 +8,16 @@ window.onload = function (){
     };
 };
 
+function trueKey(key) {   // Input event.key, output what should be on webpage
+    if (key=="") {
+        return "&nbsp";
+    } else if (key.length != 1) {
+        return "";
+    } else {
+        return key;
+    }
+}
+
 function change() {
     let children=document.body.children;
     for (child of children) {
@@ -16,7 +26,7 @@ function change() {
     let newP=document.createElement("p");
     newP.id="test";
     let newDiv=document.createElement("div");
-    newDiv.className="centre horiz newpage";
+    newDiv.className="newpage";
     let newestP=document.createElement("p");
     newestP.id="newtxt";
 
@@ -25,9 +35,9 @@ function change() {
     document.body.appendChild(newDiv);
 
     addEventListener("keydown", (event) => {
-        let test=document.getElementById('test');
-        let span=document.getElementById('newtxt');
-        test.innerText+=span.innerText;
-        span.innerText=event.key;
+        let test = document.getElementById('test');
+        let span = document.getElementById('newtxt');
+        test.innerHTML += (span.innerHTML == " ") ? "&nbsp" : span.innerHTML;
+        span.innerHTML = trueKey(event.key);
     });
 }
